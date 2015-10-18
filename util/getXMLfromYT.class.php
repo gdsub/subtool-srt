@@ -11,11 +11,13 @@ class getXMLfromYT{
 
     var $youtubeUrl;
     var $language;
+    var $cc_sub;
     var $base_url = "https://video.google.com/timedtext";
 
-    public function __construct($youtubeUrl, $language = "en"){
+    public function __construct($youtubeUrl, $language = "en", $cc_sub){
         $this->youtubeUrl = $youtubeUrl;
         $this->language = $language;
+	$this->cc_sub = $cc_sub;
     }
 
     public function getXML(){
@@ -23,6 +25,9 @@ class getXMLfromYT{
         $target = $this->base_url .
                          "?lang=" . $this->language.
                             "&v=" . $this->getYoutubeVideoId();
+	if($this->cc_sub){
+		$target = $target."&name=CC";
+	}
         $result = file_get_contents($target);
         if( strlen($result)!==0 ){
             return $result;

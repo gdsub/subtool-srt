@@ -11,15 +11,19 @@ require_once dirname(__FILE__)."/util/srtConvert.class.php";
 header("Content-Type:text/html;charset=GBK");
 
 $youtubeUrl = "";
+$cc_sub = FALSE;
 
 if($_POST['submit']){
     $youtubeUrl = $_POST['wz'];
     $youtubeUrl = base64_decode($youtubeUrl);
+	if($_POST['cc']){
+		$cc_sub = TRUE;
+	}
 }else{
     echo "非法提交";
 }
 
-$getxml = new getXMLfromYT($youtubeUrl);
+$getxml = new getXMLfromYT($youtubeUrl,"en",$cc_sub);
 $xml = $getxml->getXML();
 
 $srtConvert = new srtConvert();
