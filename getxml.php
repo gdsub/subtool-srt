@@ -8,7 +8,7 @@
  */
 require_once dirname(__FILE__)."/util/getXMLfromYT.class.php";
 require_once dirname(__FILE__)."/util/srtConvert.class.php";
-header("Content-Type:text/html;charset=GBK");
+header("Content-Type:text/html;charset=UTF-8");
 
 $youtubeUrl = "";
 $cc_sub = FALSE;
