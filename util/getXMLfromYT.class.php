@@ -17,7 +17,7 @@ class getXMLfromYT{
     public function __construct($youtubeUrl, $language = "en", $cc_sub){
         $this->youtubeUrl = $youtubeUrl;
         $this->language = $language;
-	$this->cc_sub = $cc_sub;
+    	$this->cc_sub = $cc_sub;
     }
 
     public function getXML(){
@@ -31,6 +31,12 @@ class getXMLfromYT{
         $result = file_get_contents($target);
         if( strlen($result)!==0 ){
             return $result;
+        }else{
+            $target = $target."&name=CC";
+            $result = file_get_contents($target);
+            if (strlen($result)!==0){
+                return $result;
+            }
         }
         return false;
     }

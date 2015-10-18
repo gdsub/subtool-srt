@@ -77,7 +77,7 @@ class srtConvert{
     function arrayToSrt($array){
         for ($i=0;$i<count($array);$i++){
             $final_output = $array[$i];
-            echo "<pre>";
+           # echo "<pre>";
             echo $final_output['number'];
             echo "\n";
             $start_time_echo = $final_output['startTime'];
@@ -91,7 +91,7 @@ class srtConvert{
             echo trim($final_output['text']);
             echo "\n";
             echo "\n";
-            echo "</pre>";
+           # echo "</pre>";
         }
     }
 

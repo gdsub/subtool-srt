@@ -8,10 +8,10 @@
  */
 require_once dirname(__FILE__)."/util/getXMLfromYT.class.php";
 require_once dirname(__FILE__)."/util/srtConvert.class.php";
-header("Content-Type:text/html;charset=UTF-8");
 
 $youtubeUrl = "";
 $cc_sub = FALSE;
+$srt_name = "";
 
 if($_POST['submit']){
     $youtubeUrl = $_POST['wz'];
@@ -19,12 +19,28 @@ if($_POST['submit']){
 	if($_POST['cc']){
 		$cc_sub = TRUE;
 	}
+	if($_POST['srtname']){
+		$srt_name = $_POST['srtname'];
+	}else{
+		$srt_name = "【注意】文件名待修改";
+	}
 }else{
     echo "非法提交";
 }
 
 $getxml = new getXMLfromYT($youtubeUrl,"en",$cc_sub);
 $xml = $getxml->getXML();
+if ($xml == false){
+    exit("啥也没有得到啊亲");
+}else{
+
+header("content-type: text/html; charset=UTF-8"); //页面编码
+header("content-type:text/plain");
+header("content-disposition:attachment;filename=".$srt_name."_en.srt");
+header("pragma:no-cache");
+header("expires:0");
+
+}
 
 $srtConvert = new srtConvert();
 $srt = $srtConvert->xmlToArray($xml);
