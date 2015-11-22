@@ -21,6 +21,8 @@ if($_POST['submit']){
 	}
 	if($_POST['srtname']){
 		$srt_name = $_POST['srtname'];
+		// $srt_name = urlencode($srt_name);
+		// $srt_name = str_replace("+", "%20", $srt_name);
 	}else{
 		$srt_name = "【注意】文件名待修改";
 	}
@@ -34,11 +36,16 @@ if ($xml == false){
     exit("啥也没有得到啊亲");
 }else{
 
-header("content-type: text/html; charset=UTF-8"); //页面编码
-header("content-type:text/plain");
-header("content-disposition:attachment;filename=".$srt_name."_en.srt");
-header("pragma:no-cache");
-header("expires:0");
+   header("Content-type: text/plain; charset=utf-8");
+   header("Content-Type: application/force-download");  
+   header("Content-Type: application/octet-stream");  
+   header("Content-Type: application/download");  
+   header('Content-Disposition:inline;filename="'.$srt_name.'.en.srt"');  
+   header("Content-Transfer-Encoding: binary");  
+   header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");  
+   header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");  
+   header("Cache-Control: must-revalidate, post-check=0, pre-check=0");  
+   header("Pragma: no-cache");  
 
 }
 

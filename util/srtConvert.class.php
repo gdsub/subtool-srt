@@ -114,6 +114,7 @@ class srtConvert{
         $str = preg_replace('/\r/', ' ', $str);
         $str = preg_replace('/\r\n/', ' ', $str);
         $str = preg_replace('/  /', ' ', $str);
+		$str = htmlspecialchars_decode($str, ENT_QUOTES);
         return $str;
     }
 }
