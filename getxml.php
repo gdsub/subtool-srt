@@ -30,17 +30,24 @@ if($_POST['submit']){
     echo "非法提交";
 }
 
-$getxml = new getXMLfromYT($youtubeUrl,"en",$cc_sub);
+$getxml = new getXMLfromYT($youtubeUrl, "en", $cc_sub, "");
 $xml = $getxml->getXML();
 if ($xml == false){
-    exit("啥也没有得到啊亲");
+    exit("I got nothing...");
 }else{
+    $filename = $srt_name;
+    
+    if ($cc_sub){
+        $filename = $filename.".cc";
+    }
+    
+    $filename = $filename.".en.srt";
 
    header("Content-type: text/plain; charset=utf-8");
    header("Content-Type: application/force-download");  
    header("Content-Type: application/octet-stream");  
    header("Content-Type: application/download");  
-   header('Content-Disposition:inline;filename="'.$srt_name.'.en.srt"');  
+   header('Content-Disposition:inline;filename="'.$filename);  
    header("Content-Transfer-Encoding: binary");  
    header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");  
    header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");  
