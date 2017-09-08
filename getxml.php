@@ -29,7 +29,7 @@ if($_POST['submit']){
 }else{
     echo "非法提交";
 }
-
+//$getxml = new getXMLfromYT($youtubeUrl, "en", $cc_sub, "");
 $getxml = new getXMLfromYT($youtubeUrl, "en", $cc_sub, "");
 $xml = $getxml->getXML();
 if ($xml == false){
