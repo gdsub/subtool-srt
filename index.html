@@ -6,25 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>获取YT字幕文档</title>
+    <title>Get YouTube Subtitles</title>
+    <link rel="icon" type="image/ico" href="favicon.ico">
     <link rel="stylesheet" href="index.css">
     <link href="https://cdn.bootcss.com/material-design-lite/1.3.0/material.red-deep_purple.min.css" rel="stylesheet">
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script defer src="https://cdn.bootcss.com/material-design-lite/1.3.0/material.min.js"></script>
 </head>
 
 <body>
     <div class="head"></div>
     <form action="getxml.php" method="post" onsubmit="antigfw()">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <label for="" class="mdl-textfield__label">YouTube 链接</label>
+            <label for="" class="mdl-textfield__label">YouTube link</label>
             <input type="text" class="mdl-textfield__input" name="wz" id="yturl" size="80" />
         </div>
         <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="checkbox">
-                <span class="mdl-switch__label">优先 CC 字幕</span>
+                <span class="mdl-switch__label">CC prefered</span>
                     <input type="checkbox" class="mdl-switch__input" id="checkbox" name="cc" value="1" checked />
             </label>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <label for="" class="mdl-textfield__label">输出的文件名（filename => filename.srt）</label>
+            <label for="" class="mdl-textfield__label">Target name. eg: filename => filename.srt</label>
             <input type="text" class="mdl-textfield__input" name="srtname" id="srt" size="80" />
         </div>
         <div disabled class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab fab" id="submit-trigger">
@@ -36,14 +37,14 @@
     <div class="foot">
         <div class="column">
             <div class="links">
-                <div class="link">提交 Bug：<a href="https://github.com/GDGNanyang/subtool-srt/issues" target="_blank">GitHub Issues</a></div>
+                <div class="link">Bug report: <a href="https://github.com/GDGNanyang/subtool-srt/issues" target="_blank">GitHub Issues</a></div>
                 <div class="link"><a href="https://github.com/GDGNanyang/subtool-srt/" target="_blank">View Source</a></div>
-                <div class="link"><a href="http://www.gdsub.cn/joinsrtool" target="_blank">加入谷创字幕组</a></div>
+                <div class="link"><a href="http://gdsub.cn/joinsrtool" target="_blank">Join GDSub</a></div>
             </div>
         </div>
         <div class="column">
             <div class="links">
-                <div class="link">Developed by: <a href="https://www.gdsub.com" target="_blank">谷创字幕组</a></div>
+                <div class="link">Developed by: <a href="https://www.gdsub.com" target="_blank">GDSub</a></div>
                 <div class="link">Designed by: <a href="https://github.com/DevChache" target="_blank">DevChache</a></div>
                 <div class="link">Server Sponsored by: <a href="https://my.hengtian.cc/aff.php?aff=270" target="_blank">衡天小张</a></div>
             </div>
@@ -189,9 +190,14 @@
 
     <script>
         function antigfw() {
+            var base64url = document.getElementById("yturl").getAttribute("data-encoded");
             var yturl = document.getElementById("yturl").value;
-            var anti_encoded = Base64.encode(yturl);
+            var anti_encoded = "";
+            if (base64url === void 0 || yturl !== base64url)
+                anti_encoded = Base64.encode(yturl);
+            else anti_encoded = base64url;
             document.getElementById("yturl").value = anti_encoded;
+            document.getElementById("yturl").setAttribute("data-encoded", anti_encoded);
         }
     </script>
     <div class="prompt">
